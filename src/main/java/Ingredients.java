@@ -6,6 +6,7 @@ public class Ingredients {
     public Ingredients(List<String> ingredients) {
         this.ingredients = ingredients;
     }
+    public  Ingredients(){}
 
     public List<String> getIngredients() {
         return ingredients;
