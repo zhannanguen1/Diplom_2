@@ -8,15 +8,15 @@ import io.restassured.response.ValidatableResponse;
 import static io.restassured.RestAssured.given;
 
 public class UserClient {
-    public static final String MAIN_URL = "https://stellarburgers.nomoreparties.site/";
+//    public static final String MAIN_URL = "https://stellarburgers.nomoreparties.site/";
     public static final String CREATE_USER_PATH = "api/auth/register";
     public static final String LOGIN_PATH = "api/auth/login";
     public static final String LOGOUT_PATH = "api/auth/logout";
     public static final String TOKEN_PATH = "api/auth/token";
     public static final String USER_PATH = "api/auth/user";
-    public UserClient() {
-        RestAssured.baseURI = MAIN_URL;
-    }
+//    public UserClient() {
+//        RestAssured.baseURI = MAIN_URL;
+//    }
     @Step("Регистрация юзера")
     public ValidatableResponse createUser(CreateUser createUser){
         return given()
@@ -71,17 +71,28 @@ public class UserClient {
                 .then();
     }
 
+//    @Step("Выход юзера из системы")
+//    public ValidatableResponse logoutUser(User user, String accessToken){
+//        return given()
+//                .header("Content-type", "application/json")
+//                .headers("authorization", accessToken)
+//                .and()
+//                .body(user)
+//                .when()
+//                .post(LOGOUT_PATH)
+//                .then();
+//    }
+
     @Step("Удаление юзера")
-    public ValidatableResponse logoutUser(User user, String accessToken){
+    public ValidatableResponse deleteUser(String accessToken){
         return given()
                 .header("Content-type", "application/json")
                 .headers("authorization", accessToken)
-                .and()
-                .body(user)
                 .when()
-                .post(LOGOUT_PATH)
+                .delete(USER_PATH)
                 .then();
     }
+
     @Step("Обновление данных пользователя")
     public ValidatableResponse updateDataOfUser(String accessToken, User user){
         return given()
