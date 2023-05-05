@@ -6,6 +6,11 @@ public class User {
         this.email = email;
         this.name = name;
     }
+    public User() {}
+
+    public static User from(CreateUser createUser) {
+        return new User(createUser.getEmail(), createUser.getName());
+    }
 
     public String getEmail() {
         return email;

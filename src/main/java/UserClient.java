@@ -101,7 +101,7 @@ public class UserClient {
                 .and()
                 .body(user)
                 .when()
-                .post(USER_PATH)
+                .patch(USER_PATH)
                 .then();
     }
     @Step("Обновление данных пользователя без предварительной авторизации")
@@ -111,7 +111,7 @@ public class UserClient {
                 .and()
                 .body(user)
                 .when()
-                .post(USER_PATH)
+                .patch(USER_PATH)
                 .then();
     }
 }
