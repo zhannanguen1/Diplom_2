@@ -6,6 +6,9 @@ public class UserAccount {
         this.password = password;
     }
     public UserAccount(){}
+    public static UserAccount from(CreateUser createUser){
+        return new UserAccount(createUser.getEmail(), createUser.getPassword());
+    }
     public String getEmail() {
         return email;
     }
