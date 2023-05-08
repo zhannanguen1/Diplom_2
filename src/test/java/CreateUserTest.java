@@ -16,14 +16,15 @@ public class CreateUserTest {
 
     @Before
     @Step("Подготовка тестовых данных")
-    public void setUp(){
+    public void setUp() {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
-        userClient =  new UserClient();
+        userClient = new UserClient();
         createUser = UsersDataForTests.getNewValidUser();
     }
+
     @Test
     @Description("Проверка создания юзера")
-    public void CreateUserTest(){
+    public void CreateUserTest() {
         ValidatableResponse response = userClient.createUser(createUser);
         int actualStatusCode = response.extract().statusCode();
         boolean isSuccessInMessageTrueCreate = response.extract().path("success");
@@ -31,9 +32,10 @@ public class CreateUserTest {
         assertEquals(200, actualStatusCode);
         assertTrue(isSuccessInMessageTrueCreate);
     }
+
     @After
     @Step("Удаление пользователя")
-    public void cleanUp(){
+    public void cleanUp() {
         userClient.deleteUser(accessToken);
     }
 

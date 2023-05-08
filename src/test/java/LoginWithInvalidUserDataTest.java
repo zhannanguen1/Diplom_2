@@ -14,13 +14,14 @@ public class LoginWithInvalidUserDataTest {
 
     @Before
     @Step("Подготовка тестовых данных")
-    public void setUp(){
+    public void setUp() {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
-        userClient =  new UserClient();
+        userClient = new UserClient();
     }
+
     @Test
     @Description("Попытка войти в систему с неверным email юзера")
-    public void userCanNotLoginWithNotValidEmail(){
+    public void userCanNotLoginWithNotValidEmail() {
         CreateUser createUser = UsersDataForTests.getChangedEmailUser();
         ValidatableResponse response = userClient.userLogin(UserAccount.from(createUser));
         int actualStatusCodeCreate = response.extract().statusCode();
@@ -30,9 +31,10 @@ public class LoginWithInvalidUserDataTest {
         assertFalse(isSuccessInMessageFalse);
         assertEquals("email or password are incorrect", message);
     }
+
     @Test
     @Description("Попытка войти в систему с неверным password юзера")
-    public void userCanNotLoginWithNotValidPassword(){
+    public void userCanNotLoginWithNotValidPassword() {
         CreateUser createUser = UsersDataForTests.getChangedPasswordUser();
         ValidatableResponse response = userClient.userLogin(UserAccount.from(createUser));
         int actualStatusCodeCreate = response.extract().statusCode();

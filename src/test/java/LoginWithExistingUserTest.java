@@ -17,14 +17,15 @@ public class LoginWithExistingUserTest {
 
     @Before
     @Step("Подготовка тестовых данных")
-    public void setUp(){
+    public void setUp() {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
-        userClient =  new UserClient();
+        userClient = new UserClient();
         createUser = UsersDataForTests.getNewValidUser();
     }
+
     @Test
     @Description("Вход юзера в систему")
-    public void UserCanLogin(){
+    public void UserCanLogin() {
         ValidatableResponse response = userClient.createUser(createUser);
         ValidatableResponse responseLogin = userClient.userLogin(UserAccount.from(createUser));
         int actualStatusCodeLogin = responseLogin.extract().statusCode();
@@ -37,9 +38,10 @@ public class LoginWithExistingUserTest {
         assertTrue(userData.contains("name"));
         assertTrue(accessToken.contains("Bearer"));
     }
+
     @After
     @Step("Удаление пользователя")
-    public void cleanUp(){
+    public void cleanUp() {
         userClient.deleteUser(accessToken);
     }
 }

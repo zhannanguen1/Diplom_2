@@ -19,19 +19,20 @@ public class UpdateAuthorizedUserDataTest {
 
     @Before
     @Step("Подготовка тестовых данных")
-    public void setUp(){
+    public void setUp() {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
-        userClient =  new UserClient();
+        userClient = new UserClient();
         createUser = UsersDataForTests.getNewValidUser();
     }
+
     @Test
     @Description("Изменение почты юзера")
-    public void changeUsersEmail(){
+    public void changeUsersEmail() {
         ValidatableResponse response = userClient.createUser(createUser);
         accessToken = response.extract().path("accessToken");
         CreateUser changeUsersParam = UsersDataForTests.getChangedEmailUser();
         String changedEmail = changeUsersParam.getEmail();
-        ValidatableResponse response1 = userClient.updateDataOfUser(accessToken, user.from(changeUsersParam));
+        ValidatableResponse response1 = userClient.updateDataOfUser(accessToken, User.from(changeUsersParam));
         int actualStatusCodeChange = response1.extract().statusCode();
         boolean isSuccessInMessageTrueChange = response1.extract().path("success");
         HashMap<String, String> changedUserData = response1.extract().path("user");
@@ -40,14 +41,15 @@ public class UpdateAuthorizedUserDataTest {
         assertTrue(isSuccessInMessageTrueChange);
         assertEquals(changedEmail, responseEmail);
     }
+
     @Test
     @Description("Изменение почты юзера")
-    public void changeUsersPassword(){
+    public void changeUsersPassword() {
         ValidatableResponse response = userClient.createUser(createUser);
         accessToken = response.extract().path("accessToken");
         CreateUser changeUsersParam = UsersDataForTests.getChangedPasswordUser();
         String changedEmail = changeUsersParam.getEmail();
-        ValidatableResponse response1 = userClient.updateDataOfUser(accessToken, user.from(changeUsersParam));
+        ValidatableResponse response1 = userClient.updateDataOfUser(accessToken, User.from(changeUsersParam));
         int actualStatusCodeChange = response1.extract().statusCode();
         boolean isSuccessInMessageTrueChange = response1.extract().path("success");
         HashMap<String, String> changedUserData = response1.extract().path("user");
@@ -56,14 +58,15 @@ public class UpdateAuthorizedUserDataTest {
         assertTrue(isSuccessInMessageTrueChange);
         assertEquals(changedEmail, responseEmail);
     }
+
     @Test
     @Description("Изменение почты юзера")
-    public void changeUsersName(){
+    public void changeUsersName() {
         ValidatableResponse response = userClient.createUser(createUser);
         accessToken = response.extract().path("accessToken");
         CreateUser changeUsersParam = UsersDataForTests.getChangedNameUser();
         String changedEmail = changeUsersParam.getEmail();
-        ValidatableResponse response1 = userClient.updateDataOfUser(accessToken, user.from(changeUsersParam));
+        ValidatableResponse response1 = userClient.updateDataOfUser(accessToken, User.from(changeUsersParam));
         int actualStatusCodeChange = response1.extract().statusCode();
         boolean isSuccessInMessageTrueChange = response1.extract().path("success");
         HashMap<String, String> changedUserData = response1.extract().path("user");
@@ -72,9 +75,10 @@ public class UpdateAuthorizedUserDataTest {
         assertTrue(isSuccessInMessageTrueChange);
         assertEquals(changedEmail, responseEmail);
     }
+
     @After
     @Step("Удаление пользователя")
-    public void cleanUp(){
+    public void cleanUp() {
         userClient.deleteUser(accessToken);
     }
 }

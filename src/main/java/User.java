@@ -6,7 +6,9 @@ public class User {
         this.email = email;
         this.name = name;
     }
-    public User() {}
+
+    public User() {
+    }
 
     public static User from(CreateUser createUser) {
         return new User(createUser.getEmail(), createUser.getName());

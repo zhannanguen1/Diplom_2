@@ -9,21 +9,22 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-public class CreateUserNegativeTests {
+public class CreateUserNegativeTest {
     private UserClient userClient;
     private CreateUser createUser;
     private String accessToken;
+
     @Before
     @Step("Подготовка тестовых данных")
-    public void setUp(){
+    public void setUp() {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
-        userClient =  new UserClient();
+        userClient = new UserClient();
         createUser = UsersDataForTests.getNewValidUser();
     }
 
     @Test
     @Description("Попытка создать юзера с уже существующими данными")
-    public void createUserWithExistingData(){
+    public void createUserWithExistingData() {
         ValidatableResponse response = userClient.createUser(createUser);
         accessToken = response.extract().path("accessToken");
         ValidatableResponse response1 = userClient.createUser(createUser);
@@ -34,9 +35,10 @@ public class CreateUserNegativeTests {
         assertFalse(isSuccessInMessageFalseExistingUser);
         assertEquals("User already exists", responseMessage);
     }
+
     @After
     @Step("Удаление пользователя")
-    public void cleanUp(){
+    public void cleanUp() {
         userClient.deleteUser(accessToken);
     }
 }

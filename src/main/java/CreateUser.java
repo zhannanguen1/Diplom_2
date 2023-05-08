@@ -2,12 +2,16 @@ public class CreateUser {
     private String email;
     private String password;
     private String name;
-    public CreateUser(String email, String password, String name){
+
+    public CreateUser(String email, String password, String name) {
         this.email = email;
         this.password = password;
         this.name = name;
     }
-    public CreateUser(){}
+
+    public CreateUser() {
+    }
+
     public String getEmail() {
         return email;
     }
