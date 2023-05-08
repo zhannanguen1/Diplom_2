@@ -5,8 +5,10 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import static org.junit.Assert.*;
 
 public class CreateOrdersNegativeTest {
     private UserOrders userOrders;
@@ -18,6 +20,18 @@ public class CreateOrdersNegativeTest {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
         userOrders = new UserOrders();
         userIngredients = new UserIngredients();
+    }
+    @Test
+    @Description("Создание заказа без предварительной авторизации")
+    public void createOrderWithoutLogin() {
+        ValidatableResponse responseIngredients = userIngredients.getIngredients();
+        ArrayList<HashMap<String, String>> responseData = responseIngredients.extract().path("data");
+        Ingredients ingredients = InvalidIngredients.getValidIngredientsHash(responseData);
+        ValidatableResponse responseCreateOrder = userOrders.createUserOrdersWithoutLogin(ingredients);
+        int actualStatusCode = responseCreateOrder.extract().statusCode();
+        boolean isSuccessInMessageTrueCreateOrder = responseCreateOrder.extract().path("success");
+        assertEquals(200, actualStatusCode);
+        assertTrue(isSuccessInMessageTrueCreateOrder);
     }
 
     @Test

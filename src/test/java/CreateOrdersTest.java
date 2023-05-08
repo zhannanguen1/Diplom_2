@@ -42,19 +42,6 @@ public class CreateOrdersTest {
         assertTrue(isSuccessInMessageTrueCreateOrder);
     }
 
-    @Test
-    @Description("Создание заказа без предварительной авторизации")
-    public void createOrderWithoutLogin() {
-        ValidatableResponse responseIngredients = userIngredients.getIngredients();
-        ArrayList<HashMap<String, String>> responseData = responseIngredients.extract().path("data");
-        Ingredients ingredients = InvalidIngredients.getValidIngredientsHash(responseData);
-        ValidatableResponse responseCreateOrder = userOrders.createUserOrdersWithoutLogin(ingredients);
-        int actualStatusCode = responseCreateOrder.extract().statusCode();
-        boolean isSuccessInMessageTrueCreateOrder = responseCreateOrder.extract().path("success");
-        assertEquals(200, actualStatusCode);
-        assertTrue(isSuccessInMessageTrueCreateOrder);
-    }
-
     @After
     @Step("Удаление пользователя")
     public void cleanUp() {
