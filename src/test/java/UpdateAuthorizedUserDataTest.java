@@ -15,7 +15,6 @@ public class UpdateAuthorizedUserDataTest {
     private UserClient userClient;
     private CreateUser createUser;
     private String accessToken;
-    private User user;
 
     @Before
     @Step("Подготовка тестовых данных")

@@ -29,6 +29,7 @@ public class CreateOrdersTest {
     }
 
     @Test
+    @Description("Создание заказа")
     public void createOrdersTest() {
         ValidatableResponse response = userClient.createUser(createUser);
         accessToken = response.extract().path("accessToken");

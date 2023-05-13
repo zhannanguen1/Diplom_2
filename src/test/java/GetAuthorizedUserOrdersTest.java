@@ -36,6 +36,8 @@ public class GetAuthorizedUserOrdersTest {
         ArrayList<HashMap<String, String>> responseData = responseIngredients.extract().path("data");
         Ingredients ingredients = InvalidIngredients.getValidIngredientsHash(responseData);
         ValidatableResponse responseCreateOrder = userOrders.createUserOrders(accessToken, ingredients);
+        int codeOfCreatedUser = responseCreateOrder.extract().statusCode();
+        assertEquals(200, codeOfCreatedUser);
         ValidatableResponse responseGetList = userOrders.getOrderAuthorizedUser(accessToken);
         int actualStatusCodeOrders = responseGetList.extract().statusCode();
         boolean isSuccessInMessageTrueOrders = responseGetList.extract().path("success");

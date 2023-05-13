@@ -24,7 +24,7 @@ public class CreateUserTest {
 
     @Test
     @Description("Проверка создания юзера")
-    public void CreateUserTest() {
+    public void checkCreateUserTest() {
         ValidatableResponse response = userClient.createUser(createUser);
         int actualStatusCode = response.extract().statusCode();
         boolean isSuccessInMessageTrueCreate = response.extract().path("success");

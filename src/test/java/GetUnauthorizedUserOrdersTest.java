@@ -9,17 +9,11 @@ import static org.junit.Assert.assertFalse;
 
 public class GetUnauthorizedUserOrdersTest {
     private UserOrders userOrders;
-    private UserClient userClient;
-    private CreateUser createUser;
-    private UserIngredients userIngredients;
 
     @Before
     public void setUp() {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
-        userClient = new UserClient();
-        createUser = UsersDataForTests.getNewValidUser();
         userOrders = new UserOrders();
-        userIngredients = new UserIngredients();
     }
 
     @Test

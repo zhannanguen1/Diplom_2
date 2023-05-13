@@ -10,7 +10,6 @@ import static org.junit.Assert.assertFalse;
 
 public class UpdateUnauthorizedUserDataTest {
     private UserClient userClient;
-    private User user;
 
     @Before
     @Step("Подготовка тестовых данных")

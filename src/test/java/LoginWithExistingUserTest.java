@@ -13,7 +13,6 @@ public class LoginWithExistingUserTest {
     private UserClient userClient;
     private CreateUser createUser;
     private String accessToken;
-    private User user;
 
     @Before
     @Step("Подготовка тестовых данных")
@@ -25,7 +24,7 @@ public class LoginWithExistingUserTest {
 
     @Test
     @Description("Вход юзера в систему")
-    public void UserCanLogin() {
+    public void userCanLogin() {
         ValidatableResponse response = userClient.createUser(createUser);
         ValidatableResponse responseLogin = userClient.userLogin(UserAccount.from(createUser));
         int actualStatusCodeLogin = responseLogin.extract().statusCode();
